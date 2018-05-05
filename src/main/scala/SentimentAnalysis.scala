@@ -9,7 +9,7 @@ object SentimentAnalysis {
   def main(args: Array[String]) {
     Logger.getLogger("org").setLevel(Level.ERROR)
 
-
+// hey
     // Get Twitter Token and the filter words
     // By default, use my token and filter word is Trump
     var consumerKey ="PD7ERIVkqJ3xsg1V0rwmu43ok"
