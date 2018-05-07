@@ -16,12 +16,10 @@ object SentimentAnalysis {
     var consumerSecret = "RyCgiLKqP8kQjcwxJ8h9EQFzLGm3dL5n2eCTN9YpQ2RRYG3cd7"
     var accessToken = "931749427211128832-UJP8jUVAEieK0fP9mmHn5yuD4DiGi8M"
     var accessTokenSecret = "TAuHxwpL6FghEom8IDUtQTQPUeHik6nxhjmhzvyGlfGUk"
-  //  var filters = Seq("Trump")
 
   if (args.length > 3) {
       // get data from your setting
     val  Array(consumerKey, consumerSecret, accessToken, accessTokenSecret) = args.take(4)
-   //   filters = args.takeRight(args.length - 4)
     }
 
 
@@ -56,38 +54,6 @@ topCounts30.foreachRDD(rdd => {
   topList.foreach{case (count, tag) => println("%s (%s tweets)".format(tag, count))}
 })
 
-
-//    val tags = stream.flatMap { status => status.getHashtagEntities.map(_.getText)}
-//
-//    // save tages to files
-//    tags.countByValue()
-//      .foreachRDD { rdd =>val now = org.joda.time.DateTime.now()
-//        val savepath = now.toString("yyyy_MM_dd__hh__mm")
-//        rdd.sortBy(_._2).map(x => (x, now)).saveAsTextFile(s"output/tags/$savepath")
-//      }
-//
-//
-//    // save whole live twitter in trump data
-//    val tweets = stream.filter {t =>
-//      val tags = t.getText.split(" ").filter(_.startsWith(filters(0))).map(_.toLowerCase)
-//      tags.exists { x => true }
-//    }
-//
-//
-//    val data = tweets.map { status =>
-//      val sentiment = SentimentAnalysisUtils.detectSentiment(status.getText)
-//
-//      val tagss = status.getHashtagEntities.map(_.getText.toLowerCase)
-//        println(status.getText,  tagss.toString(),sentiment.toString)
-//      println("=======================================================")
-//      (status.getText,  tagss.toString(),sentiment.toString)
-//
-//
-//    }
-//
-//    // save path
-//
-//    data.saveAsTextFiles("output/twitter_and_rating/t")
 
     ssc.start()
     ssc.awaitTermination()
