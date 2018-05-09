@@ -11,10 +11,10 @@ object SentimentAnalysis {
 
     // Get Twitter Token and the filter words
     // By default, use my token and filter word is Trump
-    var consumerKey ="PD7ERIVkqJ3xsg1V0rwmu43ok"
-    var consumerSecret = "RyCgiLKqP8kQjcwxJ8h9EQFzLGm3dL5n2eCTN9YpQ2RRYG3cd7"
-    var accessToken = "931749427211128832-UJP8jUVAEieK0fP9mmHn5yuD4DiGi8M"
-    var accessTokenSecret = "TAuHxwpL6FghEom8IDUtQTQPUeHik6nxhjmhzvyGlfGUk"
+    var consumerKey ="F36yD1iItIQhRXiz6OivF2eun"
+    var consumerSecret = "cLtRADTh89RNkbtsM69NuFVjL6ZGX6gv4dxXoC07FrLfcabOl3 "
+    var accessToken = "282572624-R6DjYVqNTattKyHogcxCF3Gdp1Akl2mqUVI1QZzA"
+    var accessTokenSecret = "7IrQN5Sw9AivQagXctZXlhDWji6l9xbk82N5ECzwOQ5Si"
 
   if (args.length > 3) {
       // get data from your setting
@@ -42,7 +42,7 @@ val topCounts30 = hashTags.map((_, 1)).reduceByKeyAndWindow(_ + _, Seconds(30)).
 // Print popular hashtags
 topCounts30.foreachRDD(rdd => {
   val topList = rdd.take(10)
-  println("\nPopular topics in last 30 seconds (%s total):".format(rdd.count()))
+  println("\nPopular topics in the last 30 seconds (%s total):".format(rdd.count()))
   topList.foreach{case (count, tag) => println("%s (%s tweets)".format(tag, count))}
 })
 
