@@ -9,7 +9,6 @@ object SentimentAnalysis {
   def main(args: Array[String]) {
     Logger.getLogger("org").setLevel(Level.ERROR)
 
-// hey
     // Get Twitter Token and the filter words
     // By default, use my token and filter word is Trump
     var consumerKey ="PD7ERIVkqJ3xsg1V0rwmu43ok"
@@ -37,17 +36,10 @@ object SentimentAnalysis {
       
     val hashTags = stream.flatMap(status => status.getText.split(" ").filter(_.startsWith("#")))
 
-val topCounts120 = hashTags.map((_, 1)).reduceByKeyAndWindow(_ + _, Seconds(60)).map{case (topic, count) => (count, topic)}.transform(_.sortByKey(false))
 val topCounts30 = hashTags.map((_, 1)).reduceByKeyAndWindow(_ + _, Seconds(30)).map{case (topic, count) => (count, topic)}.transform(_.sortByKey(false))
 
 
 // Print popular hashtags
-topCounts120.foreachRDD(rdd => {
-  val topList = rdd.take(10)
-  println("\nPopular topics in last 120 seconds (%s total):".format(rdd.count()))
-  topList.foreach{case (count, tag) => println("%s (%s tweets)".format(tag, count))}
-})
-
 topCounts30.foreachRDD(rdd => {
   val topList = rdd.take(10)
   println("\nPopular topics in last 30 seconds (%s total):".format(rdd.count()))
